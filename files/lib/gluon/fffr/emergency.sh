@@ -37,6 +37,9 @@ if [ $counter -lt 10 ]
 		if [ $counter -eq 3 ]; then echo "$0 - 3 min offline - try wifi"|logger; wifi ; fi
 		if [ $counter -eq 5 ]; then echo "$0 - 5 min offline - try restart fastd"|logger; /etc/init.d/fastd restart ; fi
 		if [ $counter -eq 7 ]; then echo "$0 - 7 min offline - try restart network"|logger; /etc/init.d/network restart ; fi
-        else reboot
+        else 
+		upgrade_check='/tmp/autoupdate.lock'
+		[ -f $upgrade_check ] && exit 
+		reboot
 fi
 echo $counter
