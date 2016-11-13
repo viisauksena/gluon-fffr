@@ -38,7 +38,6 @@ if [ $counter -lt 10 ]
 		if [ $counter -eq 4 ]; then echo "$0 - 4 min offline - try iw scan"|logger; iwinfo phy0 scan; fi
 		if [ $counter -eq 5 ]; then echo "$0 - 5 min offline - try restart fastd"|logger; /etc/init.d/fastd restart ; fi
 		if [ $counter -eq 7 ]; then echo "$0 - 7 min offline - try restart network"|logger; /etc/init.d/network restart ; fi
-		if [ $counter -
         else 
 		pgrep -f autoupdater >/dev/null && exit
 		reboot  # never reboot while autoupdater run
