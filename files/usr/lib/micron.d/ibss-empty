@@ -1,1 +1,1 @@
-12 * * * * iwinfo phy0 scan
+12 * * * * if [ $(uci get wireless.ibss_radio0.disabled) -eq 0 ]; then if [ $(batctl o -H|grep -v mesh-vpn|wc -l) -eq 0 ]; then iwinfo ibss0 scan|grep -q $(uci get wireless.ibss_radio0.bssid) && wifi ;fi;fi
