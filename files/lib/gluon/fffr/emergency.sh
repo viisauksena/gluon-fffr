@@ -39,6 +39,7 @@ if [ $counter -lt 10 ]
                 if [ $counter -eq 5 ]; then echo "$0 - 5 min offline - try wifi"|logger; wifi ; fi
 		if [ $counter -eq 6 ]; then echo "$0 - 6 min offline - try restart fastd"|logger; /etc/init.d/fastd restart ; fi
 		if [ $counter -eq 8 ]; then echo "$0 - 8 min offline - try restart network"|logger; /etc/init.d/network restart ; fi
+		if [ $counter -eq 9 ]; then cat /tmp/sysinfo/model|grep -q 841 && ledfoo & ; fi
         else 
 		pgrep -f autoupdater >/dev/null && exit # never reboot on autoupdate
 		reboot  # finally
