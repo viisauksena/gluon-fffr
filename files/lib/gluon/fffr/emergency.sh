@@ -34,11 +34,11 @@ if [ $counter -lt 10 ]
         then
 		let counter+=1
 		echo $counter > /tmp/emergency
-		if [ $counter -eq 2 ]; then echo "$0 - 2 min offline - try wifi"|logger; wifi ; fi
+		if [ $counter -eq 2 ]; then echo "$0 - 2 min offline - try iw scan"|logger; iwinfo phy0 scan; fi
 		if [ $counter -eq 3 ]; then echo "$0 - 3 min offline - try undo wifi rfkill button"|logger; wifi up; fi
-		if [ $counter -eq 5 ]; then echo "$0 - 5 min offline - try iw scan"|logger; iwinfo phy0 scan; fi
+                if [ $counter -eq 5 ]; then echo "$0 - 5 min offline - try wifi"|logger; wifi ; fi
 		if [ $counter -eq 6 ]; then echo "$0 - 6 min offline - try restart fastd"|logger; /etc/init.d/fastd restart ; fi
-		if [ $counter -eq 7 ]; then echo "$0 - 7 min offline - try restart network"|logger; /etc/init.d/network restart ; fi
+		if [ $counter -eq 8 ]; then echo "$0 - 8 min offline - try restart network"|logger; /etc/init.d/network restart ; fi
         else 
 		pgrep -f autoupdater >/dev/null && exit # never reboot on autoupdate
 		reboot  # finally
